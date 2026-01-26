@@ -1,3 +1,13 @@
+const button = document.querySelector('button');
+const cardsContainer = document.querySelector('#cardsContainer')
+
+button.addEventListener('click', () => {
+    event.preventDefault();
+    addBookToLibrary("fdafa", "cccccc", 12, "read");
+    updateLibrary();
+
+})
+
 const myLibrary = [];
 
 function Book(author, title, pages, status, token) {
@@ -17,18 +27,17 @@ function addBookToLibrary(author, title, pages, status) {
   myLibrary.push(newBook);
 }
 
-addBookToLibrary("fdafa", "cccccc", 12, "read");
-addBookToLibrary("authfdafor", "bbbbbb", 13, "idk");
-addBookToLibrary("autsdfdsdffdsfsdhor", "aaaaaa", 14, "not read");
-
-for (const books in myLibrary){ // <----------------------------------------------------- REVIEW FOR IN 4 arrays !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    displayBook(myLibrary[books].author, myLibrary[books].title, myLibrary[books].status, myLibrary[books].token)
+function updateLibrary(){
+  cardsContainer.replaceChildren();
+    for (const books in myLibrary){ // <----------------------------------------------------- REVIEW FOR IN 4 arrays !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        displayBook(myLibrary[books].author, myLibrary[books].title, myLibrary[books].status, myLibrary[books].token);
+    }
 }
 
 function displayBook(author, title, pages, status, token){
-    const container = document.createElement('div');
-    document.body.appendChild(container);
-    container.classList.add('container');
+  const container = document.createElement('div');
+  cardsContainer.appendChild(container); //-----------FIXED ERROR: remove "document." before cardsContainer
+  container.classList.add('container');
 
     const authorText = document.createElement('h1');
     authorText.textContent = author;
