@@ -1,6 +1,8 @@
 const button = document.querySelector('button');
 const cardsContainer = document.querySelector('#cardsContainer')
 
+//=========================================== EVENT LISTENERS ==================================
+
 button.addEventListener('click', () => {
     event.preventDefault();
     addBookToLibrary("fdafa", "cccccc", 12, "read");
@@ -8,8 +10,11 @@ button.addEventListener('click', () => {
 
 })
 
+// ========================================= LOGIC ============================================
+
 const myLibrary = [];
 
+// object constructor for the Book
 function Book(author, title, pages, status, token) {
   if (!new.target) {
     throw Error("You must use the 'new' operator to call the constructor");
@@ -22,18 +27,21 @@ function Book(author, title, pages, status, token) {
   this.token = token;
 }
 
+// adds book to array myLibrary
 function addBookToLibrary(author, title, pages, status) {
   const newBook = new Book(author, title, pages, status, crypto.randomUUID());
   myLibrary.push(newBook);
 }
 
-function updateLibrary(){
+// deletes all children of cardsContainer and adds all array elements to the page using the displayBook function
+function updateLibrary(){   
   cardsContainer.replaceChildren();
-    for (const books in myLibrary){ // <----------------------------------------------------- REVIEW FOR IN 4 arrays !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    for (const books in myLibrary){
         displayBook(myLibrary[books].author, myLibrary[books].title, myLibrary[books].status, myLibrary[books].token);
     }
 }
 
+// creates a container and add all the book information as children
 function displayBook(author, title, pages, status, token){
   const container = document.createElement('div');
   cardsContainer.appendChild(container); //-----------FIXED ERROR: remove "document." before cardsContainer
