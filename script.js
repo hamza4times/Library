@@ -16,3 +16,37 @@ function addBookToLibrary(author, title, pages, status) {
   const newBook = new Book(author, title, pages, status, crypto.randomUUID());
   myLibrary.push(newBook);
 }
+
+addBookToLibrary("fdafa", "cccccc", 12, "read");
+addBookToLibrary("authfdafor", "bbbbbb", 13, "idk");
+addBookToLibrary("autsdfdsdffdsfsdhor", "aaaaaa", 14, "not read");
+
+for (const books in myLibrary){ // <----------------------------------------------------- REVIEW FOR IN 4 arrays !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    displayBook(myLibrary[books].author, myLibrary[books].title, myLibrary[books].status, myLibrary[books].token)
+}
+
+function displayBook(author, title, pages, status, token){
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    container.classList.add('container');
+
+    const authorText = document.createElement('h1');
+    authorText.textContent = author;
+    container.appendChild(authorText);
+
+    const titleText = document.createElement('h1');
+    titleText.textContent = title;
+    container.appendChild(titleText);
+
+    const pagesText = document.createElement('h1');
+    pagesText.textContent = pages;
+    container.appendChild(pagesText);
+
+    const statusText = document.createElement('h1');
+    statusText.textContent = status;
+    container.appendChild(statusText);
+
+    const tokenText = document.createElement('h1');
+    tokenText.textContent = token;
+    container.appendChild(tokenText);
+}
