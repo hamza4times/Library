@@ -1,8 +1,19 @@
+/*--------------FONTS----------------*/
+*{
+    font-family: "Concert One";
+}
+
+/*--------------STYLE---------------*/
+
 #cardsContainer{
     background-color: yellow;
     padding: 100px;
 }
 
 .container{
+    background-color: red;
+}
+
+#addBookButton{
     background-color: red;
 }

@@ -1,4 +1,4 @@
-const button = document.querySelector('button');
+const button = document.querySelector('#addBookButton');
 const cardsContainer = document.querySelector('#cardsContainer')
 
 //=========================================== EVENT LISTENERS ==================================
