@@ -9,6 +9,9 @@ const author = document.querySelector('#author');
 const title = document.querySelector('#title');
 const pages = document.querySelector('#pages');
 const status = document.querySelector('#status');
+const read = document.querySelector('#read');
+const unread = document.querySelector('#not-read');
+
 
 //=========================================== EVENT LISTENERS ==================================
 
@@ -31,9 +34,18 @@ submitButton.addEventListener("click", (event) => {
     event.preventDefault();
     addBookToLibrary(author.value, title.value, pages.value, statusSelected.value);
     updateLibrary();
+    clearForm();
     dialog.close();
   }
 });
+
+function clearForm(){
+  author.value = "";
+  title.value = "";
+  pages.value = "";
+  read.checked = false;
+  unread.checked = false;
+}
 
 // "Close" button closes the dialog
 closeButton.addEventListener("click", () => {
