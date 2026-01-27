@@ -1,26 +1,38 @@
+//======================================= QUERY SELECTORS ====================================
 const addBookButton = document.querySelector('#addBookButton');
 const cardsContainer = document.querySelector('#cardsContainer');
 const submitButton = document.querySelector('#submitButton')
 const closeButton = document.querySelector("#closeButton");
 const dialog = document.querySelector("dialog");
 
+const author = document.querySelector('#author');
+const title = document.querySelector('#title');
+const pages = document.querySelector('#pages');
+const status = document.querySelector('#status');
 
 //=========================================== EVENT LISTENERS ==================================
 
-addBookButton.addEventListener('click', () => {
+addBookButton.addEventListener('click', (event) => {
     event.preventDefault();
-    dialog.showModal();
-
-    // addBookToLibrary("fdafa", "cccccc", 12, "read");
-    // updateLibrary();
-
+    dialog.showModal(); 
 })
 
-//========================================= Dialog ===========================================
+//======================================= Dialog logic =========================================
 
-submitButton.addEventListener("click", () => {
-  addBookToLibrary("fdafa", "cccccc", 12, "read");
-  updateLibrary();
+function getSelectedStatus() { // <------------------ REVIEW: You must query it at the moment of submit, because radio buttons change.
+  return document.querySelector('input[name="status"]:checked');
+}
+
+submitButton.addEventListener("click", (event) => {
+  const statusSelected = getSelectedStatus();
+  if (author.value === "" || title.value === "" || pages.value === "" || !statusSelected){
+    alert("Please fill out the full form");
+  }else{
+    event.preventDefault();
+    addBookToLibrary(author.value, title.value, pages.value, statusSelected.value);
+    updateLibrary();
+    dialog.close();
+  }
 });
 
 // "Close" button closes the dialog
@@ -54,8 +66,8 @@ function addBookToLibrary(author, title, pages, status) {
 // deletes all children of cardsContainer and adds all array elements to the page using the displayBook function
 function updateLibrary(){   
   cardsContainer.replaceChildren();
-    for (const books in myLibrary){
-        displayBook(myLibrary[books].author, myLibrary[books].title, myLibrary[books].status, myLibrary[books].token);
+    for (const books of myLibrary){
+        displayBook(books.author, books.title, books.pages, books.status, books.token);
     }
 }
 

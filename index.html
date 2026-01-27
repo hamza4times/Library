@@ -13,17 +13,36 @@
     <h1>HI</h1>
 
     <dialog>
-        <button autofocus id="closeButton">
-            <img src="Close.png" width="50px" height="50px">
-        </button>
+        <button autofocus id="closeButton"> <img src="Close.png" width="50px" height="50px"> </button>
         <p>HOLA!</p>
         <form method="dialog">
-            <button type="submit" id="submitButton">Add to library</button>
+            <!-----------------author, title, and pages----------------->
+            <label for="author">author: </label>
+            <input placeholder="Leigh Bardugo" id="author" required>
+            <label for="title">title: </label>
+            <input placeholder="Six of Crows" id="title" required>
+            <label for="pages">pages: </label>
+            <input placeholder="496" id="pages" type="number" required>
+            <!--------------------------------- STATUS [Read/Not Read] --------------------------------->
+            <fieldset id="status" required>
+                <legend>Status:</legend>
+                <div>
+                    <input type="radio" id="read" name="status" value="read"/>
+                    <label for="read">Read</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="not-read" name="status" value="not-read"/>
+                    <label for="not-read">Not read</label>
+                </div>
+            </fieldset>
+            <button type="submit" id="submitButton">Submit</button>
         </form>
     </dialog>
 
     <button type="submit" id="addBookButton">Add a book to the library!</button>
     <div id="cardsContainer"></div>
+    
     <script src="script.js"></script>
 </body>
 </html>
