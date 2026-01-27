@@ -11,7 +11,18 @@
 </head>
 <body>
     <h1>HI</h1>
-    <button type="submit" id="addBookButton">Submit</button>
+
+    <dialog>
+        <button autofocus id="closeButton">
+            <img src="Close.png" width="50px" height="50px">
+        </button>
+        <p>HOLA!</p>
+        <form method="dialog">
+            <button type="submit" id="submitButton">Add to library</button>
+        </form>
+    </dialog>
+
+    <button type="submit" id="addBookButton">Add a book to the library!</button>
     <div id="cardsContainer"></div>
     <script src="script.js"></script>
 </body>

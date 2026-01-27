@@ -1,14 +1,32 @@
-const button = document.querySelector('#addBookButton');
-const cardsContainer = document.querySelector('#cardsContainer')
+const addBookButton = document.querySelector('#addBookButton');
+const cardsContainer = document.querySelector('#cardsContainer');
+const submitButton = document.querySelector('#submitButton')
+const closeButton = document.querySelector("#closeButton");
+const dialog = document.querySelector("dialog");
+
 
 //=========================================== EVENT LISTENERS ==================================
 
-button.addEventListener('click', () => {
+addBookButton.addEventListener('click', () => {
     event.preventDefault();
-    addBookToLibrary("fdafa", "cccccc", 12, "read");
-    updateLibrary();
+    dialog.showModal();
+
+    // addBookToLibrary("fdafa", "cccccc", 12, "read");
+    // updateLibrary();
 
 })
+
+//========================================= Dialog ===========================================
+
+submitButton.addEventListener("click", () => {
+  addBookToLibrary("fdafa", "cccccc", 12, "read");
+  updateLibrary();
+});
+
+// "Close" button closes the dialog
+closeButton.addEventListener("click", () => {
+  dialog.close();
+});
 
 // ========================================= LOGIC ============================================
 
