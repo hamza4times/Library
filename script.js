@@ -4,14 +4,14 @@ const cardsContainer = document.querySelector('#cardsContainer');
 const submitButton = document.querySelector('#submitButton')
 const closeButton = document.querySelector("#closeButton");
 const dialog = document.querySelector("dialog");
-
+// const deleteButton = document.querySelector('.deleteButton');
+//===================================== QUERY SELECTORS FOR FORM ELEMENTS ====================
 const author = document.querySelector('#author');
 const title = document.querySelector('#title');
 const pages = document.querySelector('#pages');
 const status = document.querySelector('#status');
 const read = document.querySelector('#read');
 const unread = document.querySelector('#not-read');
-
 
 //=========================================== EVENT LISTENERS ==================================
 
@@ -69,7 +69,7 @@ function Book(author, title, pages, status, token) {
   this.token = token;
 }
 
-// adds book to array myLibrary
+// adds book to array myLibrary with a unique ID
 function addBookToLibrary(author, title, pages, status) {
   const newBook = new Book(author, title, pages, status, crypto.randomUUID());
   myLibrary.push(newBook);
@@ -83,11 +83,11 @@ function updateLibrary(){
     }
 }
 
-// creates a container and add all the book information as children
+// creates a container and add all the book information as children + the delete button and it's event listener
 function displayBook(author, title, pages, status, token){
-  const container = document.createElement('div');
-  cardsContainer.appendChild(container); //-----------FIXED ERROR: remove "document." before cardsContainer
-  container.classList.add('container');
+    const container = document.createElement('div');
+    cardsContainer.appendChild(container);
+    container.classList.add('container');
 
     const authorText = document.createElement('h1');
     authorText.textContent = author;
@@ -108,4 +108,19 @@ function displayBook(author, title, pages, status, token){
     const tokenText = document.createElement('h1');
     tokenText.textContent = token;
     container.appendChild(tokenText);
+    tokenText.classList.add('token');
+
+    const deleteButton = document.createElement('button');
+    container.appendChild(deleteButton);
+    deleteButton.classList.add('deleteButton');
+
+    deleteButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      container.remove();
+      let obj = myLibrary.find(o => o.token === tokenText.textContent);
+      const index = myLibrary.indexOf(obj);
+      if (index > -1) {
+        myLibrary.splice(index, 1);
+      }
+    })
 }
