@@ -38,3 +38,7 @@
     width: 100px;
     height: 100px;
 }
+
+.changeStatusButton{
+    background-color: wheat;
+}

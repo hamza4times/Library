@@ -69,6 +69,16 @@ function Book(author, title, pages, status, token) {
   this.token = token;
 }
 
+Book.prototype.changeStatusToRead = function(){
+  this.status = "Read";
+  updateLibrary();
+}
+
+Book.prototype.changeStatusToUnRead = function(){
+  this.status = "Not Read";
+  updateLibrary();
+}
+
 // adds book to array myLibrary with a unique ID
 function addBookToLibrary(author, title, pages, status) {
   const newBook = new Book(author, title, pages, status, crypto.randomUUID());
@@ -83,7 +93,7 @@ function updateLibrary(){
     }
 }
 
-// creates a container and add all the book information as children + the delete button and it's event listener
+// creates a container and add all the book information as children + the delete button and it's event listener + the change status button and it's event listener
 function displayBook(author, title, pages, status, token){
     const container = document.createElement('div');
     cardsContainer.appendChild(container);
@@ -113,6 +123,7 @@ function displayBook(author, title, pages, status, token){
     const deleteButton = document.createElement('button');
     container.appendChild(deleteButton);
     deleteButton.classList.add('deleteButton');
+    deleteButton.textContent = "delete";
 
     deleteButton.addEventListener('click', (event) => {
       event.preventDefault();
@@ -121,6 +132,35 @@ function displayBook(author, title, pages, status, token){
       const index = myLibrary.indexOf(obj);
       if (index > -1) {
         myLibrary.splice(index, 1);
+      }
+    })
+
+    const changeStatus = document.createElement('button');
+    container.appendChild(changeStatus);
+    changeStatus.classList.add('changeStatusButton');
+    changeStatus.textContent = "Change Status";
+
+    if (statusText.textContent === "read"){
+      changeStatus.textContent = "Change Status to Unread";
+    }else if (statusText.textContent === "not read"){
+      changeStatus.textContent = "Change Status to Read";
+    }
+
+    changeStatus.addEventListener('click', () => {
+      if (statusText.textContent === "read"){
+        statusText.textContent = "not read";
+      }else if (statusText.textContent === "not read"){
+        statusText.textContent = "read";
+      }
+      else{
+        alert('ERROR WITH changeStatus even Listener 1st else statement')
+      }
+      if (statusText.textContent === "read"){
+        changeStatus.textContent = "Change Status to Unread";
+      }else if (statusText.textContent === "not read"){
+        changeStatus.textContent = "Change Status to Read";
+      }else{
+        alert('ERROR WITH changeStatus even Listener 2nd else statement')
       }
     })
 }
