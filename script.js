@@ -57,25 +57,23 @@ closeButton.addEventListener("click", () => {
 const myLibrary = [];
 
 // object constructor for the Book
-function Book(author, title, pages, status, token) {
-  if (!new.target) {
-    throw Error("You must use the 'new' operator to call the constructor");
+class Book{
+  constructor(author, title, pages, status, token){
+    this.author = author;
+    this.title = title;
+    this.pages = pages;
+    this.status = status;
+    this.token = token;
   }
-
-  this.author = author;
-  this.title = title;
-  this.pages = pages;
-  this.status = status;
-  this.token = token;
 }
 
 Book.prototype.changeStatusToRead = function(){
-  this.status = "Read";
+  this.status = "read";
   updateLibrary();
 }
 
 Book.prototype.changeStatusToUnRead = function(){
-  this.status = "Not Read";
+  this.status = "not Read";
   updateLibrary();
 }
 
@@ -147,20 +145,12 @@ function displayBook(author, title, pages, status, token){
     }
 
     changeStatus.addEventListener('click', () => {
-      if (statusText.textContent === "read"){
-        statusText.textContent = "not read";
-      }else if (statusText.textContent === "not read"){
-        statusText.textContent = "read";
-      }
-      else{
-        alert('ERROR WITH changeStatus even Listener 1st else statement')
-      }
-      if (statusText.textContent === "read"){
-        changeStatus.textContent = "Change Status to Unread";
-      }else if (statusText.textContent === "not read"){
-        changeStatus.textContent = "Change Status to Read";
-      }else{
-        alert('ERROR WITH changeStatus even Listener 2nd else statement')
-      }
+      const book = myLibrary.find(b => b.token === token);
+
+    if (book.status === "read") {
+      book.changeStatusToUnRead();
+    } else {
+      book.changeStatusToRead();
+    }
     })
 }
